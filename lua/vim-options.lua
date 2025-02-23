@@ -1,0 +1,26 @@
+
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.cmd("set number")
+vim.cmd("set nowrap")
+vim.cmd("set sidescroll=1")
+vim.cmd("set sidescrolloff=5")
+vim.cmd("set scrolloff=3")
+vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
+vim.g.mapleader = " "
+vim.keymap.set('n', '<leader>gt', ':lua require("rails-rspec-toggle").toggle()<CR>', { noremap = true, silent = true })
+vim.o.clipboard = "unnamedplus"
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+vim.keymap.set("x", "<leader>re", ":Refactor extract ")
+vim.keymap.set("x", "<leader>rf", ":Refactor extract_to_file ")
+vim.keymap.set("x", "<leader>rv", ":Refactor extract_var ")
+vim.keymap.set({ "n", "x" }, "<leader>ri", ":Refactor inline_var")
+vim.keymap.set( "n", "<leader>rI", ":Refactor inline_func")
+vim.keymap.set("n", "<leader>rb", ":Refactor extract_block")
+vim.keymap.set("n", "<leader>rbf", ":Refactor extract_block_to_file")
+vim.keymap.set("n", "<leader>lt", ":call localorie#translate()<CR>", { silent = true })
+
