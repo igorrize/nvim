@@ -9,9 +9,12 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		lazy = false,
-		opts = {
-			auto_install = true,
-		},
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "pyright", "gopls" },
+        automatic_installation = true,
+      })
+    end,
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -20,9 +23,6 @@ return {
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			local lspconfig = require("lspconfig")
-			lspconfig.tsserver.setup({
-				capabilities = capabilities,
-			})
 			lspconfig.solargraph.setup({
 				capabilities = capabilities,
 			})
