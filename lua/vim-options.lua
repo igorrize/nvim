@@ -1,4 +1,3 @@
-
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
@@ -29,3 +28,6 @@ vim.keymap.set("n", "<leader>w+", ":vertical resize +5<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w-", ":vertical resize -5<CR>", { silent = true })
 vim.keymap.set("n", "<leader>tl", "<CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", silent)
 vim.keymap.set("n", "<leader>tn", "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", silent)
+vim.keymap.set("n", "<leader>cp", function()
+  require("copilot.panel").open()
+end, { desc = "Open Copilot Panel", silent = true })
