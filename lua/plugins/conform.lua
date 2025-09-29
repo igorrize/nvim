@@ -1,3 +1,4 @@
+-- lua/plugins/conform.lua
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
@@ -6,7 +7,11 @@ return {
 		{
 			"<leader>gf",
 			function()
-				require("conform").format({ async = true, lsp_fallback = true })
+				require("conform").format({
+					async = false,
+					lsp_fallback = true,
+					timeout_ms = 3000,
+				})
 			end,
 			mode = "",
 			desc = "Format buffer",
@@ -15,58 +20,24 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			ruby = { "rubocop" },
-			go = { "goimports_reviser", "gofumpt" },
+			ruby = { "rubocop" }, -- ИЗМЕНЕНО с rubyfmt на rubocop
+			go = { "gofumpt", "goimports" },
 		},
-
 		formatters = {
 			rubocop = {
-				command = function()
-					if vim.fn.executable("mise") == 1 and vim.fn.filereadable(".mise.toml") == 1 then
-						return "mise"
-					elseif vim.fn.executable("bundle") == 1 and vim.fn.filereadable("Gemfile") == 1 then
-						return "bundle"
-					else
-						return "rubocop"
-					end
-				end,
-				args = function()
-					if vim.fn.executable("mise") == 1 and vim.fn.filereadable(".mise.toml") == 1 then
-						return {
-							"exec",
-							"--",
-							"bundle",
-							"exec",
-							"rubocop",
-							"--auto-correct",
-							"--stdin",
-							"$FILENAME",
-							"--format",
-							"quiet",
-							"--stderr",
-						}
-					elseif vim.fn.executable("bundle") == 1 and vim.fn.filereadable("Gemfile") == 1 then
-						return {
-							"exec",
-							"rubocop",
-							"--auto-correct",
-							"--stdin",
-							"$FILENAME",
-							"--format",
-							"quiet",
-							"--stderr",
-						}
-					else
-						return { "--auto-correct", "--stdin", "$FILENAME", "--format", "quiet", "--stderr" }
-					end
-				end,
+				command = "rubocop",
+				args = {
+					"--autocorrect-all",
+					"--stdin",
+					"$FILENAME",
+					"--format",
+					"quiet",
+					"--stderr",
+				},
 				stdin = true,
 			},
 		},
-
-		format_on_save = {
-			timeout_ms = 500,
-			lsp_fallback = true,
-		},
+		format_on_save = false, -- ОТКЛЮЧАЕМ автоформат при сохранении
+		notify_on_error = true,
 	},
 }

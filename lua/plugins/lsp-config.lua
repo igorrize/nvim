@@ -11,7 +11,12 @@ return {
 		lazy = false,
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "pyright", "gopls" },
+				ensure_installed = {
+					"lua_ls",
+					"pyright",
+					"gopls",
+					"solargraph",
+				},
 				automatic_installation = true,
 			})
 		end,
@@ -25,25 +30,30 @@ return {
 
 			lspconfig.solargraph.setup({
 				capabilities = capabilities,
+				cmd = { vim.fn.stdpath("data") .. "/mason/bin/solargraph", "stdio" },
+				settings = {
+					solargraph = {
+						diagnostics = false,
+						rubocop = false,
+						formatting = false,
+						completion = true,
+					},
+				},
 			})
+
 			lspconfig.html.setup({
 				capabilities = capabilities,
 			})
+
 			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 			})
 
-			-- УБИРАЕМ golangci_lint_ls - он конфликтует с gopls
-			-- lspconfig.golangci_lint_ls.setup({
-			-- 	capabilities = capabilities,
-			-- })
-
-			-- Правильная настройка gopls для монорепо
+			-- Gopls
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 				root_dir = function(fname)
 					local util = require("lspconfig.util")
-					-- Ищем go.mod в текущей и родительских папках
 					return util.root_pattern("go.mod", "go.work", ".git")(fname)
 				end,
 				settings = {
@@ -62,6 +72,10 @@ return {
 			vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
 			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
 			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+			vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
+			vim.keymap.set("n", "<leader>f", function()
+				vim.lsp.buf.format({ async = true })
+			end, {})
 		end,
 	},
 }

@@ -26,25 +26,39 @@ require("neotest").setup({
 	},
 })
 require("catppuccin").setup({
-  transparent_background = true
+	transparent_background = true,
 })
 local wk = require("which-key")
 
 wk.register({
-  r = {
-    name = "+rspec",
-    r = { ":Neotest run file<CR>", "Run Nearest test in file" },
-    l = { ":Neotest run last<CR>", "Run Last test" },
-    a = { ":Neotest attach<CR>", "Attach Nearest test" },
-    o = { ":Neotest output<CR>", "Neotest output" },
-    s = { ":Neotest summary toggle<CR>", "Neotest summary" },
-    S = { ":Neotest stop<CR>", "Neotest stop" },
-    p = { ":Neotest output-panel toggle<CR>", "Output panel toggle" },
-    j = {
-      name = "+jump",
-      n = { ":Neotest jump next<CR>", "Jump next" },
-      p = { ":Neotest jump prev<CR>", "Jump prev" },
-    },
-  },
+	r = {
+		name = "+rspec",
+		r = { ":Neotest run file<CR>", "Run Nearest test in file" },
+		l = { ":Neotest run last<CR>", "Run Last test" },
+		a = { ":Neotest attach<CR>", "Attach Nearest test" },
+		o = { ":Neotest output<CR>", "Neotest output" },
+		s = { ":Neotest summary toggle<CR>", "Neotest summary" },
+		S = { ":Neotest stop<CR>", "Neotest stop" },
+		p = { ":Neotest output-panel toggle<CR>", "Output panel toggle" },
+		j = {
+			name = "+jump",
+			n = { ":Neotest jump next<CR>", "Jump next" },
+			p = { ":Neotest jump prev<CR>", "Jump prev" },
+		},
+	},
 }, { prefix = "<leader>" })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "ruby",
+	callback = function()
+		vim.defer_fn(function()
+			vim.diagnostic.disable(0)
+		end, 100)
+	end,
+})
 
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, {
+	pattern = "*.rb",
+	callback = function()
+		vim.diagnostic.disable(0)
+	end,
+})
