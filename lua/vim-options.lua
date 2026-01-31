@@ -7,6 +7,9 @@ vim.cmd("set nowrap")
 vim.cmd("set sidescroll=1")
 vim.cmd("set sidescrolloff=5")
 vim.cmd("set scrolloff=3")
+vim.cmd("set termguicolors")
+vim.cmd("set cursorline")
+vim.opt.mouse = "a"
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 vim.g.mapleader = " "

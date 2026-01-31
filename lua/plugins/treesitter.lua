@@ -85,7 +85,7 @@ return {
 			vim.opt.fillchars:append("fold: ")
 			
 			-- Folding keymaps
-			vim.keymap.set("n", "<space>", "za", { desc = "Toggle fold" })
+			-- vim.keymap.set("n", "<space>", "za", { desc = "Toggle fold" })
 			vim.keymap.set("n", "zR", "zR", { desc = "Open all folds" })
 			vim.keymap.set("n", "zM", "zM", { desc = "Close all folds" })
 			vim.keymap.set("n", "zr", "zr", { desc = "Open folds recursively" })
