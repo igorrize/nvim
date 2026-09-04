@@ -1,8 +1,5 @@
 return {
-    'altermo/ultimate-autopair.nvim',
-    event={'InsertEnter','CmdlineEnter'},
-    branch='v0.6', --recommended as each new version will have breaking changes
-    opts={
-        --Config goes here
-    },
+  "m4xshen/autoclose.nvim",
+  event = "InsertEnter", -- lazy-load on first insert
+  opts = {}, -- activates setup(); plugin was dormant (no setup call) before
 }

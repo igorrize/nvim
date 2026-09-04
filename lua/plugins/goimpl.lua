@@ -1,8 +1,8 @@
 return {
 	"edolphin-ydf/goimpl.nvim",
-	requires = {
+	ft = "go",
+	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-lua/popup.nvim" },
 		{ "nvim-telescope/telescope.nvim" },
 		{ "nvim-treesitter/nvim-treesitter" },
 	},

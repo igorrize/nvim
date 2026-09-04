@@ -13,6 +13,8 @@ vim.opt.mouse = "a"
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+vim.filetype.add({ extension = { bb = "clojure" } })
 vim.keymap.set('n', '<leader>gt', ':lua require("rails-rspec-toggle").toggle()<CR>', { noremap = true, silent = true })
 vim.o.clipboard = "unnamedplus"
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
@@ -31,6 +33,3 @@ vim.keymap.set("n", "<leader>w+", ":vertical resize +5<CR>", { silent = true })
 vim.keymap.set("n", "<leader>w-", ":vertical resize -5<CR>", { silent = true })
 vim.keymap.set("n", "<leader>tl", "<CMD>lua require('telescope').extensions.git_worktree.git_worktrees()<CR>", silent)
 vim.keymap.set("n", "<leader>tn", "<CMD>lua require('telescope').extensions.git_worktree.create_git_worktree()<CR>", silent)
-vim.keymap.set("n", "<leader>cp", function()
-  require("copilot.panel").open()
-end, { desc = "Open Copilot Panel", silent = true })

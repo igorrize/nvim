@@ -6,8 +6,8 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 	},
 	opts = {
-		-- lsp_keymaps = false,
-		-- other options
+		lsp_cfg = false,
+		lsp_keymaps = false,
 	},
 	event = { "CmdlineEnter" },
 	ft = { "go", "gomod" },
